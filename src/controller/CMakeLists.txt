@@ -1,0 +1,5 @@
+add_subdirectory(homepage)
+add_subdirectory(login)
+add_subdirectory(style)
+add_subdirectory(index)
+add_subdirectory(signup)
