@@ -28,4 +28,4 @@ add_library(Crow include/crow.h)
 target_include_directories(Crow PUBLIC include)
 set_target_properties(Crow PROPERTIES LINKER_LANGUAGE CXX)
 
-add_subdirectory(backend)
+add_subdirectory(src)
