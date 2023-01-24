@@ -8,7 +8,7 @@ namespace homepage {
 void AddHomepageController(crow::SimpleApp *app) {
   crow::SimpleApp &aabrham = *app;
 
-  CROW_ROUTE(aabrham, "/")([]() {
+  CROW_ROUTE(aabrham, "/homepage")([]() {
     crow::mustache::context ctx;
     return crow::mustache::load_text("homepage/homepageTemplate.html");
   });
