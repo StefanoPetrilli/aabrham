@@ -3,6 +3,7 @@
 #include "homepage_controller.h"
 #include "login_controller.h"
 #include "style_controller.h"
+#include "index_controller.h"
 
 int main() {
   const static std::string kFrontendBaseDirectory = "view";
@@ -12,6 +13,7 @@ int main() {
   homepage::AddHomepageController(&aabrham_backend);
   login::AddLoginController(&aabrham_backend);
   style::AddStyleController(&aabrham_backend);
+  indexx::AddIndexController(&aabrham_backend);
 
   aabrham_backend.port(18080).multithreaded().run();
 }

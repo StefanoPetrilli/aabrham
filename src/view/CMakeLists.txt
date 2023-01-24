@@ -2,4 +2,6 @@ configure_file(homepage/homepageTemplate.html homepage/homepageTemplate.html COP
 configure_file(homepage/homepageDirective.js homepage/homepageDirective.js COPYONLY)
 configure_file(login/loginTemplate.html login/loginTemplate.html COPYONLY)
 configure_file(login/loginDirective.js login/loginDirective.js COPYONLY)
+configure_file(index/indexTemplate.html index/indexTemplate.html COPYONLY)
+configure_file(index/indexDirective.js index/indexDirective.js COPYONLY)
 configure_file(style/style.css style/style.css COPYONLY)
