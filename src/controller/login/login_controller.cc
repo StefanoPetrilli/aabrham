@@ -8,7 +8,7 @@ namespace login {
 void AddLoginController(crow::SimpleApp *app) {
   crow::SimpleApp &aabrham = *app;
 
-  CROW_ROUTE(aabrham, "/login/")([]() {
+  CROW_ROUTE(aabrham, "/login")([]() {
     crow::mustache::context ctx;
     return crow::mustache::load_text("login/loginTemplate.html");
   });

@@ -17,6 +17,5 @@ void AddIndexController(crow::SimpleApp *app) {
     crow::mustache::context ctx;
     return crow::mustache::load_text("index/indexDirective.js");
   });
-
 }
 }
