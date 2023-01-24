@@ -1,0 +1,13 @@
+//
+// Created by Stefano on 1/22/2023.
+//
+
+#ifndef AABRHAM_BACKEND_SRC_CONTROLLER_HOMEPAGE_HOMEPAGE_CONTROLLER_H_
+#define AABRHAM_BACKEND_SRC_CONTROLLER_HOMEPAGE_HOMEPAGE_CONTROLLER_H_
+#include "crow.h"
+
+namespace homepage {
+void AddHomepageController(crow::SimpleApp* app);
+}
+
+#endif //AABRHAM_BACKEND_SRC_CONTROLLER_HOMEPAGE_HOMEPAGE_CONTROLLER_H_
