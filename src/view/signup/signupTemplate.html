@@ -1,12 +1,23 @@
 <!doctype html>
-<html lang="eng">
+<html lang="en" ng-app="aabrham">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="signupDirective.js"></script>
     <link rel="stylesheet" href="../style.css">
     <title>Insert title here!</title>
 </head>
-<body>
-signup
+<body ng-controller="SignupController">
+<form>
+    <div ng-show="failedLogin">{{loginError}}</div>
+    <label>
+        Username
+        <input type="text" placeholder="Enter Username" name="username" ng-model="username">
+    </label>
+    <label>
+        Password
+        <input type="password" placeholder="Enter Password" name="password" ng-model="password">
+    </label>
+    <button type="submit" ng-click="signup(username, password)">Login</button>
+</form>
 </body>
 </html>
