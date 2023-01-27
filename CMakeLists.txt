@@ -20,16 +20,12 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 enable_testing()
 
-add_library(Asio include/asio.hpp)
-target_include_directories(Asio PUBLIC include)
-set_target_properties(Asio PROPERTIES LINKER_LANGUAGE CXX)
+#add_library(rediscpp include/redis-cpp)
+#target_include_directories(rediscpp PUBLIC include)
+#set_target_properties(rediscpp PROPERTIES LINKER_LANGUAGE CXX)
 
 add_library(Crow include/crow.h)
 target_include_directories(Crow PUBLIC include)
 set_target_properties(Crow PROPERTIES LINKER_LANGUAGE CXX)
-
-add_library(rediscpp include/redis-cpp)
-target_include_directories(rediscpp PUBLIC include)
-set_target_properties(rediscpp PROPERTIES LINKER_LANGUAGE CXX)
 
 add_subdirectory(src)
