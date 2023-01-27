@@ -4,10 +4,10 @@ add_subdirectory(model)
 add_subdirectory(infrastructure)
 
 add_executable(aabrham main.cc)
+
 target_link_libraries(aabrham
         PUBLIC
         Crow
-        rediscpp
         controller_homepage
         controller_login
         controller_style

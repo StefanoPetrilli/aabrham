@@ -4,17 +4,16 @@
 
 #ifndef AABRHAM_INFRASTRUCTURE_REDIS_REPOSITORY_H_
 #define AABRHAM_INFRASTRUCTURE_REDIS_REPOSITORY_H_
-#include "redis-cpp/stream.h"
-#include "redis-cpp/execute.h"
+#include <sw/redis++/redis.h>
 
 namespace redis {
 class Connection {
  public:
   Connection();
-  int HashSet(const std::string& key, const std::string& field, const std::string& value);
-  std::string HashGet(const std::string& key, const std::string& field);
+  void HashSet(const std::string& key, const std::string& field, const std::string& value);
+  //std::string HashGet(const std::string& key, const std::string& field);
  private:
-  std::shared_ptr<std::iostream> stream;
+  sw::redis::Redis redis = sw::redis::Redis("tcp://127.0.0.1:6379");
 };
 }
 #endif //AABRHAM_INFRASTRUCTURE_REDIS_REPOSITORY_H_

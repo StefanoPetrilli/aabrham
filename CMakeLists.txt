@@ -1,14 +1,15 @@
 cmake_minimum_required(VERSION 3.22)
 project(aabrham)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(FETCHCONTENT_QUIET off)
-set(CMAKE_CXX_STANDARD_LIBRARIES "${CMAKE_CXX_STANDARD_LIBRARIES} -static-libgcc -static-libstdc++")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic,--whole-archive -Wl,--no-whole-archive")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--whole-archive -Wl,--no-whole-archive")
 add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
 include_directories(include)
 
+# Include google test
 include(FetchContent)
 include(GoogleTest)
 FetchContent_Declare(
@@ -20,12 +21,16 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 enable_testing()
 
-#add_library(rediscpp include/redis-cpp)
-#target_include_directories(rediscpp PUBLIC include)
-#set_target_properties(rediscpp PROPERTIES LINKER_LANGUAGE CXX)
-
+# Import Crow
 add_library(Crow include/crow.h)
 target_include_directories(Crow PUBLIC include)
 set_target_properties(Crow PROPERTIES LINKER_LANGUAGE CXX)
+
+
+# Inmport Redis-plus-plus
+find_path(HIREDIS_HEADER hiredis)
+find_path(REDIS_PLUS_PLUS_HEADER sw)
+find_library(HIREDIS_LIB hiredis)
+find_library(REDIS_PLUS_PLUS_LIB redis++)
 
 add_subdirectory(src)
