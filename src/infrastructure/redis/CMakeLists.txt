@@ -1,5 +1,5 @@
 add_library(redis_repository
-        repository.cc repository.h)
+        redis.cc redis.h)
 
 target_include_directories(redis_repository PUBLIC ${REDIS_PLUS_PLUS_HEADER} ${HIREDIS_HEADER})
 target_link_libraries(redis_repository
