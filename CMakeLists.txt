@@ -34,3 +34,4 @@ find_library(HIREDIS_LIB hiredis)
 find_library(REDIS_PLUS_PLUS_LIB redis++)
 
 add_subdirectory(src)
+add_subdirectory(test)
