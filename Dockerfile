@@ -24,3 +24,17 @@ RUN apt-get update \
       tar \
       libboost-all-dev \
   && apt-get clean
+
+RUN git clone https://github.com/redis/hiredis.git
+RUN cd hiredis
+RUN make
+RUN make install
+
+RUN git clone https://github.com/sewenew/redis-plus-plus.git
+RUN cd redis-plus-plus
+RUN mkdir build
+RUN cd build
+RUN cmake ..
+RUN make
+RUN make install
+RUN cd ..
