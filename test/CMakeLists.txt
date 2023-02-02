@@ -1,5 +1,20 @@
-add_executable(aabrham_test main_test.cc)
+add_subdirectory(infrastructure)
 
-target_link_libraries(aabrham_test PUBLIC GTest::gtest_main)
+add_executable(aabrham_test
+        main_test.cc
+        infrastructure/redis/redis_test.cc
+        infrastructure/redis/redis_test.h)
+
+target_link_libraries(aabrham_test
+        PUBLIC
+        GTest::gtest_main
+        Crow
+        controller_homepage
+        controller_login
+        controller_style
+        controller_index
+        controller_signup
+        redis_repository)
+
 include(GoogleTest)
 gtest_discover_tests(aabrham_test)
