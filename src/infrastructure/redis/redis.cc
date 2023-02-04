@@ -30,5 +30,12 @@ bool RedisConnection::IsConnected() {
     return false;
   }
 }
+bool RedisConnection::Exist(const std::string &key) {
+  try {
+    return connection.exists(key) == 1;
+  } catch (sw::redis::Error& e) {
+    return false;
+  }
+}
 
 }

@@ -15,6 +15,7 @@ class RedisConnection {
   std::optional<std::string> HashGet(const std::string &key, const std::string &field);
   bool IsConnected();
   bool KeyDelete(const std::string &key);
+  bool Exist(const std::string &key);
  protected:
   sw::redis::Redis connection = sw::redis::Redis("tcp://127.0.0.1:6379");
 };
