@@ -19,12 +19,8 @@ void AddSignupController(crow::SimpleApp *app) {
   });
 
   CROW_ROUTE(aabrham, "/signup/api/<string>/<string>")([](const std::string &username, const std::string &password) {
-
-    crow::json::wvalue x;
-    x["result"] = false;
-    x["error"] = "Placeholder error" + username + password;
-
-    return crow::response(std::move(x));
+    crow::json::wvalue response = signup::Signup(username, password);
+    return crow::response(std::move(response));
   });
 }
 }
