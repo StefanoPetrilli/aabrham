@@ -10,7 +10,7 @@ void SingupModelTest::SetUp() {
     GTEST_SKIP_("Test skipped because it is impossible to connect to the redis database");
 }
 
-TEST_F(SingupModelTest, Expect_ErrorWhenUsernameAlreadyExist) {
+TEST_F(SingupModelTest, Expect_Error_WhenUsernameAlreadyExist) {
   EXPECT_TRUE(redis_connection.HashSet("username", "password", "psw"));
 
   auto result = signup::Signup("username", "psw");
@@ -20,6 +20,16 @@ TEST_F(SingupModelTest, Expect_ErrorWhenUsernameAlreadyExist) {
   };
 
   EXPECT_TRUE(redis_connection.KeyDelete("username"));
+  EXPECT_EQ(expected.dump(), result.dump());
+}
+
+TEST_F(SingupModelTest, Expect_Success) {
+  auto result = signup::Signup("new_username", "psw");
+  crow::json::wvalue expected = {
+      {"result", true},
+  };
+
+  EXPECT_TRUE(redis_connection.KeyDelete("new_username"));
   EXPECT_EQ(expected.dump(), result.dump());
 }
 }
