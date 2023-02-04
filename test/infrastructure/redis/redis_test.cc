@@ -22,6 +22,11 @@ TEST_F(RedisTest, Expect_SuccesfullReadFromDatabase) {
   EXPECT_EQ(expected, result);
 }
 
+TEST_F(RedisTest, Expect_Exist) {
+  EXPECT_TRUE(redis_connection.Exist("TestKey"));
+  EXPECT_FALSE(redis_connection.Exist("NonExistentKey"));
+}
+
 TEST_F(RedisTest, Expect_SuccesfullDeleteFromDatabase) {
   EXPECT_TRUE(redis_connection.KeyDelete("TestKey"));
 }
