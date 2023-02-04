@@ -18,5 +18,10 @@ void AddLoginController(crow::SimpleApp *app) {
     return crow::mustache::load_text("login/loginDirective.js");
   });
 
+  CROW_ROUTE(aabrham, "/login/api/<string>/<string>")([](const std::string &username, const std::string &password) {
+    crow::json::wvalue response = {{"result", false}, {"error", username + password}};
+    return crow::response(std::move(response));
+  });
+
 }
 }
