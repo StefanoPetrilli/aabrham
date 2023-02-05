@@ -1,3 +1,14 @@
 body {
-    background: #8C92AC;
+    background: #FFFFFF;
+}
+.signup #content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup #central-box{
+    background-color: #22EE5B;
+    display: inline-block;
 }

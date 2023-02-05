@@ -4,22 +4,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="signupDirective.js"></script>
     <link rel="stylesheet" href="../style.css">
-    <title>Insert title here!</title>
+    <title>Signup</title>
 </head>
-<body ng-controller="SignupController">
-<form method="post">
-    <div ng-show="failedSignup">{{signupError}}</div>
-    <label>
-        Username
-        <input type="text" placeholder="Enter Username" name="username" ng-model="username">
-    </label>
-    <label>
-        Password
-        <input type="password" placeholder="Enter Password" name="password" ng-model="password">
-    </label>
-    <button type="submit" ng-click="signup(username, password)">Signup</button>
-    <a href="/Login">Login</a>
-    <a href="/">Go back</a>
-</form>
+<body ng-controller="SignupController" class="signup">
+<div id="central-box">
+    <h1>Think Twice.</h1>
+    <h2>Just what you really need</h2>
+    <form method="post">
+        <div ng-show="failedLogin">{{loginError}}</div>
+        <label>
+            Username
+            <input type="text" placeholder="Enter Username" name="username" ng-model="username">
+        </label>
+        <label>
+            Password
+            <input type="password" placeholder="Enter Password" name="password" ng-model="password">
+        </label>
+        <button type="submit" ng-click="signup(username, password)">Signup</button>
+        <a href="/Login">Login</a>
+        <a href="/">Go back</a>
+    </form>
+</div>
 </body>
 </html>
