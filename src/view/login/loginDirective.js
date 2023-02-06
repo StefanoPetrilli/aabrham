@@ -8,6 +8,7 @@ aabrham.controller('LoginController', function LoginController($scope, $http) {
                 $scope.failedLogin = true
 
             $scope.loginError = result.data.error;
+            $scope.showSignup = result.data.error.endsWith("to ");
         });
     }
 });

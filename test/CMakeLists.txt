@@ -8,7 +8,9 @@ add_executable(aabrham_test
         infrastructure/hashing/hashing_test.cc
         infrastructure/hashing/hashing_test.h
         model/signup/signup_model_test.cc
-        model/signup/signup_model_test.h)
+        model/signup/signup_model_test.h
+        model/login/login_model_test.cc
+        model/login/login_model_test.h)
 
 target_link_libraries(aabrham_test
         PUBLIC

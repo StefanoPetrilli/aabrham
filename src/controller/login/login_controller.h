@@ -5,6 +5,7 @@
 #ifndef AABRHAM_BACKEND_SRC_CONTROLLER_LOGIN_HOMEPAGE_CONTROLLER_H_
 #define AABRHAM_BACKEND_SRC_CONTROLLER_LOGIN_HOMEPAGE_CONTROLLER_H_
 #include "crow.h"
+#include "login_model.h"
 
 namespace login {
 void AddLoginController(crow::SimpleApp* app);

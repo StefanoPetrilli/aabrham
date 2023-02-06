@@ -19,7 +19,7 @@ void AddLoginController(crow::SimpleApp *app) {
   });
 
   CROW_ROUTE(aabrham, "/login/api/<string>/<string>")([](const std::string &username, const std::string &password) {
-    crow::json::wvalue response = {{"result", false}, {"error", username + password}};
+    crow::json::wvalue response = login::Login(username, password);
     return crow::response(std::move(response));
   });
 

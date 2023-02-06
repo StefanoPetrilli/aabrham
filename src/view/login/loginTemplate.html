@@ -8,7 +8,12 @@
 </head>
 <body ng-controller="LoginController">
 <form method="post">
-    <div ng-show="failedLogin">{{loginError}}</div>
+    <div ng-show="failedLogin">
+        {{loginError}}
+        <a ng-show="showSignup" href="/signup">
+            Signup
+        </a>
+    </div>
     <label>
         Username
         <input type="text" placeholder="Enter Username" name="username" ng-model="username">
