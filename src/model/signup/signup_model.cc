@@ -15,15 +15,12 @@ crow::json::wvalue Signup(const std::string &username, const std::string &passwo
         {"error", "This username is already in use. Try with a different one."}
     };
 
-  if (redis_connection.HashSet(username, "password", ToHash(password)))
+  if (redis_connection.HashSet(username, "password", hashing::ToHash(password)))
     return {{"result", true}};
 
   return {
       {"result", false},
       {"error", "Unknown error in the signup process."}
   };
-}
-std::string ToHash(const std::string& input) {
-  return std::to_string(std::hash<std::string>{}(input));
 }
 }
