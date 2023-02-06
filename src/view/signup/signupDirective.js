@@ -5,9 +5,9 @@ aabrham.controller('SignupController', function SignupController($scope, $http) 
         $http.get("/signup/api/" + username + "/" + password).then(function (result) {
             result.data.result ?
                 window.location.href = "/homepage" :
-                $scope.failedLogin = true
+                $scope.failedSignup = true
 
-            $scope.loginError = result.data.error;
+            $scope.signupError = result.data.error;
         });
     }
 });

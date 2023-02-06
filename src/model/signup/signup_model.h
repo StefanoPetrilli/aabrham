@@ -7,9 +7,9 @@
 #include <crow/json.h>
 
 #include "../../infrastructure/redis/redis.h"
+#include "../../infrastructure/hashing/hashing.h"
 
 namespace signup {
   crow::json::wvalue Signup(const std::string& username, const std::string& password);
-  std::string ToHash(const std::string& input);
 }
 #endif //AABRHAM_SRC_MODEL_SINGUP_SIGNUP_MODEL_H_
