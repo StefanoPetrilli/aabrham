@@ -5,8 +5,8 @@
 #include "homepage_controller.h"
 
 namespace homepage {
-void AddHomepageController(crow::SimpleApp *app) {
-  crow::SimpleApp &aabrham = *app;
+void AddHomepageController(crow::App<crow::CookieParser, crow::SessionMiddleware<crow::InMemoryStore>> *app) {
+  auto &aabrham = *app;
 
   CROW_ROUTE(aabrham, "/homepage")([]() {
     crow::mustache::context ctx;

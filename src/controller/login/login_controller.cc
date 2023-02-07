@@ -5,8 +5,8 @@
 #include "login_controller.h"
 
 namespace login {
-void AddLoginController(crow::SimpleApp *app) {
-  crow::SimpleApp &aabrham = *app;
+void AddLoginController(crow::App<crow::CookieParser, crow::SessionMiddleware<crow::InMemoryStore>> *app) {
+  auto &aabrham = *app;
 
   CROW_ROUTE(aabrham, "/login")([]() {
     crow::mustache::context ctx;

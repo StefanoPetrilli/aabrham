@@ -5,8 +5,8 @@
 #include "signup_controller.h"
 
 namespace signup {
-void AddSignupController(crow::SimpleApp *app) {
-  crow::SimpleApp &aabrham = *app;
+void AddSignupController(crow::App<crow::CookieParser, crow::SessionMiddleware<crow::InMemoryStore>> *app) {
+  auto &aabrham = *app;
 
   CROW_ROUTE(aabrham, "/signup")([]() {
     crow::mustache::context ctx;

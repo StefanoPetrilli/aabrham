@@ -5,8 +5,8 @@
 #include "index_controller.h"
 
 namespace indexx { //It is not possible to use index as there is a namespace conflict in the crows library
-void AddIndexController(crow::SimpleApp *app) {
-  crow::SimpleApp &aabrham = *app;
+void AddIndexController(crow::App<crow::CookieParser, crow::SessionMiddleware<crow::InMemoryStore>> *app) {
+  auto &aabrham = *app;
 
   CROW_ROUTE(aabrham, "/")([]() {
     crow::mustache::context ctx;

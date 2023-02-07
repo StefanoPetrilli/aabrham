@@ -5,8 +5,8 @@
 #include "style_controller.h"
 
 namespace style {
-void AddStyleController(crow::SimpleApp *app) {
-  crow::SimpleApp &aabrham = *app;
+void AddStyleController(crow::App<crow::CookieParser, crow::SessionMiddleware<crow::InMemoryStore>> *app) {
+  auto &aabrham = *app;
 
   CROW_ROUTE(aabrham, "/style.css")([]() {
     crow::mustache::context ctx;
