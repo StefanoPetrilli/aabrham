@@ -7,6 +7,7 @@
 #include "crow.h"
 #include "crow/middlewares/cookie_parser.h"
 #include "crow/middlewares/session.h"
+#include "session.h"
 
 namespace homepage {
 void AddHomepageController(crow::App<crow::CookieParser, crow::SessionMiddleware<crow::InMemoryStore>> *app);
