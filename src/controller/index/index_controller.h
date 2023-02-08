@@ -7,6 +7,7 @@
 #include "crow.h"
 #include "crow/middlewares/cookie_parser.h"
 #include "crow/middlewares/session.h"
+#include "session.h"
 
 namespace indexx { //It is not possible to use index as there is a namespace conflict in the crows library
 void AddIndexController(crow::App<crow::CookieParser, crow::SessionMiddleware<crow::InMemoryStore>> *app);

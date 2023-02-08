@@ -8,9 +8,11 @@
 #include "login_model.h"
 #include "crow/middlewares/cookie_parser.h"
 #include "crow/middlewares/session.h"
+#include "session.h"
 
 namespace login {
 void AddLoginController(crow::App<crow::CookieParser, crow::SessionMiddleware<crow::InMemoryStore>> *app);
+bool IsPositive(crow::json::wvalue response);
 }
 
 #endif //AABRHAM_BACKEND_SRC_CONTROLLER_LOGIN_HOMEPAGE_CONTROLLER_H_

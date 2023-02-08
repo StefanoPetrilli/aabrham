@@ -4,11 +4,12 @@
 #include "session.h"
 
 namespace session {
-bool IsLogged(crow::App<crow::CookieParser, crow::SessionMiddleware<crow::InMemoryStore>> *app, const crow::request &request) {
-  auto &aabrham = *app;
+bool IsLogged(crow::SessionMiddleware<crow::InMemoryStore>::context &session) {
+  std::string key_content = session.get<std::string>("IsLogged");
+  return !key_content.empty();
+}
 
-  auto &session = aabrham.get_context<crow::SessionMiddleware<crow::InMemoryStore>>(request);
-  std::string string_v = session.get<std::string>("key");
-  return string_v.empty();
+void StartSession(crow::SessionMiddleware<crow::InMemoryStore>::context &session) {
+  session.set("IsLogged", "true");
 }
 }

@@ -10,17 +10,15 @@ void AddHomepageController(crow::App<crow::CookieParser, crow::SessionMiddleware
 
   CROW_ROUTE(aabrham, "/homepage")
       ([&](const crow::request &request) {
-        //auto &session = aabrham.get_context<crow::SessionMiddleware<crow::InMemoryStore>>(request);
-        //std::string string_v = session.get<std::string>("key");
+        auto &session = aabrham.get_context<crow::SessionMiddleware<crow::InMemoryStore>>(request);
         crow::response response;
-
-        if (session::IsLogged(&aabrham, request)) {
-          response.redirect("/");
-          return response;
-        }
-
         crow::mustache::context ctx;
-        response.body = crow::mustache::load_text("homepage/homepageTemplate.html");
+
+        if (!session::IsLogged(session))
+          response.redirect("/");
+        else
+          response.body = crow::mustache::load_text("homepage/homepageTemplate.html");
+
         return response;
       });
 
@@ -28,6 +26,5 @@ void AddHomepageController(crow::App<crow::CookieParser, crow::SessionMiddleware
     crow::mustache::context ctx;
     return crow::mustache::load_text("homepage/homepageDirective.js");
   });
-
 }
 }

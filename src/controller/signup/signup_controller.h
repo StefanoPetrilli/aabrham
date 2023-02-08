@@ -8,8 +8,10 @@
 #include "signup_model.h"
 #include "crow/middlewares/cookie_parser.h"
 #include "crow/middlewares/session.h"
+#include "session.h"
 
 namespace signup {
 void AddSignupController(crow::App<crow::CookieParser, crow::SessionMiddleware<crow::InMemoryStore>> *app);
+bool IsPositive(crow::json::wvalue response);
 }
 #endif //AABRHAM_SRC_CONTROLLER_SIGNUP_SIGNUP_CONTROLLER_H_
