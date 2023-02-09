@@ -5,9 +5,10 @@ add_subdirectory(infrastructure)
 
 add_executable(aabrham main.cc)
 
+find_package(Crow)
 target_link_libraries(aabrham
         PUBLIC
-        Crow
+        Crow::Crow
         controller_homepage
         controller_login
         controller_style
