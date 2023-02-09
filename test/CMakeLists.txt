@@ -12,10 +12,11 @@ add_executable(aabrham_test
         model/login/login_model_test.cc
         model/login/login_model_test.h)
 
+find_package(Crow)
 target_link_libraries(aabrham_test
         PUBLIC
         GTest::gtest_main
-        Crow
+        Crow::Crow
         controller_homepage
         controller_login
         controller_style
