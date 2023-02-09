@@ -26,5 +26,15 @@ void AddHomepageController(crow::App<crow::CookieParser, crow::SessionMiddleware
     crow::mustache::context ctx;
     return crow::mustache::load_text("homepage/homepageDirective.js");
   });
+
+  CROW_ROUTE(aabrham, "/homepage/api/signout")
+      ([&](const crow::request &request) {
+        auto &session = aabrham.get_context<crow::SessionMiddleware<crow::InMemoryStore >>(request);
+
+        session::Signout(session);
+
+        crow::json::wvalue response = {{"result", true}};
+        return crow::response(std::move(response));
+      });
 }
 }

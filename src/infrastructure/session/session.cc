@@ -12,4 +12,8 @@ bool IsLogged(crow::SessionMiddleware<crow::InMemoryStore>::context &session) {
 void StartSession(crow::SessionMiddleware<crow::InMemoryStore>::context &session) {
   session.set("IsLogged", "true");
 }
+
+void Signout(crow::SessionMiddleware<crow::InMemoryStore>::context &session) {
+  session.remove("IsLogged");
+}
 }
