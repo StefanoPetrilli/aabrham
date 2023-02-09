@@ -5,18 +5,36 @@
 #include "homepage_controller.h"
 
 namespace homepage {
-void AddHomepageController(crow::SimpleApp *app) {
-  crow::SimpleApp &aabrham = *app;
+void AddHomepageController(crow::App<crow::CookieParser, crow::SessionMiddleware<crow::InMemoryStore>> *app) {
+  auto &aabrham = *app;
 
-  CROW_ROUTE(aabrham, "/homepage")([]() {
-    crow::mustache::context ctx;
-    return crow::mustache::load_text("homepage/homepageTemplate.html");
-  });
+  CROW_ROUTE(aabrham, "/homepage")
+      ([&](const crow::request &request) {
+        auto &session = aabrham.get_context<crow::SessionMiddleware<crow::InMemoryStore>>(request);
+        crow::response response;
+        crow::mustache::context ctx;
+
+        if (!session::IsLogged(session))
+          response.redirect("/");
+        else
+          response.body = crow::mustache::load_text("homepage/homepageTemplate.html");
+
+        return response;
+      });
 
   CROW_ROUTE(aabrham, "/homepageDirective.js")([]() {
     crow::mustache::context ctx;
     return crow::mustache::load_text("homepage/homepageDirective.js");
   });
 
+  CROW_ROUTE(aabrham, "/homepage/api/signout")
+      ([&](const crow::request &request) {
+        auto &session = aabrham.get_context<crow::SessionMiddleware<crow::InMemoryStore >>(request);
+
+        session::Signout(session);
+
+        crow::json::wvalue response = {{"result", true}};
+        return crow::response(std::move(response));
+      });
 }
 }

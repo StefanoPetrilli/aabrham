@@ -5,4 +5,5 @@ target_include_directories(controller_signup PUBLIC .)
 target_link_libraries(controller_signup
         PUBLIC
         model_signup
+        session
         )
