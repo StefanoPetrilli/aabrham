@@ -5,9 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(FETCHCONTENT_QUIET off)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--whole-archive -Wl,--no-whole-archive")
-add_compile_options(-Wall -Wextra -Wpedantic -Werror)
-
-include_directories(include)
+add_compile_options(-Wall -Wextra -Wpedantic)
 
 # Include google test
 include(FetchContent)
@@ -21,13 +19,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 enable_testing()
 
-# Import Crow
-add_library(Crow include/crow.h)
-target_include_directories(Crow PUBLIC include)
-set_target_properties(Crow PROPERTIES LINKER_LANGUAGE CXX)
-
-
-# Inmport Redis-plus-plus
+# Import Redis-plus-plus
 find_path(HIREDIS_HEADER hiredis)
 find_path(REDIS_PLUS_PLUS_HEADER sw)
 find_library(HIREDIS_LIB hiredis)

@@ -1,2 +1,2 @@
 #! /bin/sh
-docker build -t aabrham-container:0.2 -f Dockerfile .
+docker build -t stefanopetrilli/aabrham-container:0.3 -f Dockerfile .
