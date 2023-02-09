@@ -1,14 +1,59 @@
 body {
     background: #FFFFFF;
+
 }
+
+
 .signup #content {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-items: center;
 }
 
 .signup #central-box{
+    position: absolute;
+    top: 30%;
+    left: 32%;
+    margin: -25px 0 0 -25px;
+    min-width: 500px;
+    max-width: 500px;
     background-color: #22EE5B;
-    display: inline-block;
+    color: #000000
+}
+
+
+
+h1 {
+    padding-left: 9%;
+    margin-bottom: -5%;
+    font-size: 450%
+}
+h2 {
+    padding-left: 10%;
+    font-size: 200%
+}
+
+label{
+    padding: 30%;
+
+}
+
+
+button {
+    width: 30%;
+    background-color: #000000;
+    color: #ffffff;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 180px;
+}
+
+.square {
+    height: 330px;
+    width: 520px;
+    background-color: #000;
+    rotate: 10deg;
+    position: absolute;
+    top: 25%;
+    left: 28%;
+    z-index: -1;
 }
