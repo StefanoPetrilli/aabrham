@@ -21,8 +21,5 @@ jobs:
 
       - name: Test
         run: |
-          pwd
-          ls
           cd ${{github.workspace}}/build/test
-          ls
           ./aabrham_test
