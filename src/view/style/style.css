@@ -19,12 +19,14 @@ body {
     padding: 0;
     margin: 0;
     overflow: hidden;
+    color: #000000;
 }
 
 .signup #header {
     display: grid;
-    height: 10vh;
+    height: 5vh;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     padding: 1.5vw;
 }
 
@@ -35,6 +37,7 @@ body {
 .signup #header #medium-text {
     grid-column: 3;
     justify-self: right;
+    margin: 0;
 }
 
 .signup #content {
@@ -49,19 +52,25 @@ body {
     grid-column: 2;
     grid-row: 2;
     height: 40vh;
+    max-height: 500px;
+    min-height: 400px;
     aspect-ratio: 10/8;
     background-color: #22EE5B;
-    color: #000000;
+    justify-self: center;
+
 }
 
 .signup #central-box-background {
     grid-column: 2;
     grid-row: 2;
     height: 40vh;
+    max-height: 500px;
+    min-height: 400px;
     aspect-ratio: 10/8;
     background-color: #000;
     rotate: 10deg;
     z-index: -1;
+    justify-self: center;
 }
 
 .signup #go-to-login {
