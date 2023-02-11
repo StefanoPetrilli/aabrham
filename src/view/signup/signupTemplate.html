@@ -4,22 +4,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="signupDirective.js"></script>
     <link rel="stylesheet" href="../style.css">
-    <title>Insert title here!</title>
+    <title>Signup</title>
 </head>
-<body ng-controller="SignupController">
-<form method="post">
-    <div ng-show="failedSignup">{{signupError}}</div>
-    <label>
-        Username
-        <input type="text" placeholder="Enter Username" name="username" ng-model="username">
-    </label>
-    <label>
-        Password
-        <input type="password" placeholder="Enter Password" name="password" ng-model="password">
-    </label>
-    <button type="submit" ng-click="signup(username, password)">Signup</button>
-    <a href="/Login">Login</a>
-    <a href="/">Go back</a>
-</form>
+<body ng-controller="SignupController" class="signup">
+<div class="header">
+    <img id="logo-image-header" src="/assets/logo/TT_50.png">
+    <p id="medium-text">Get Started</p>
+</div>
+<div class="content">
+    <div id="central-box">
+        <h1>Think Twice.</h1>
+        <h2>Just what you really need</h2>
+        <div ng-show="failedSignup" id="error-box">
+            <p id="error-text">{{signupError}}</p>
+        </div>
+        <form method="post">
+            <input type="text" placeholder="Username" name="username" ng-model="username">
+            <input type="password" placeholder="Password" name="password" ng-model="password">
+            <button type="submit" ng-click="signup(username, password)">Create Account</button>
+        </form>
+    </div>
+    <div id="central-box-background">
+    </div>
+    <div id="go-to-login">
+        <p>Already have an account? <a href="/login">Login</a></p>
+        <p id="small-text">By creating an account, you agree to the Terms of Service and Privacy Policy</p>
+    </div>
+</div>
 </body>
 </html>

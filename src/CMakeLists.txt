@@ -14,5 +14,6 @@ target_link_libraries(aabrham
         controller_style
         controller_index
         controller_signup
+        controller_assets
         redis_repository
         )

@@ -6,25 +6,32 @@
     <link rel="stylesheet" href="../style.css">
     <title>Insert title here!</title>
 </head>
-<body ng-controller="LoginController">
-<form method="post">
-    <div ng-show="failedLogin">
-        {{loginError}}
-        <a ng-show="showSignup" href="/signup">
-            Signup
-        </a>
+<body ng-controller="LoginController" class="login">
+<div class="header">
+    <img id="logo-image-header" src="/assets/logo/TT_50.png">
+    <p id="medium-text">Log in</p>
+</div>
+<div class="content">
+    <div id="central-box">
+        <h1>Think Twice.</h1>
+        <h2>Just what you really need</h2>
+        <form method="post">
+            <div ng-show="failedLogin">
+                {{loginError}}
+                <a ng-show="showSignup" href="/signup">
+                    Signup
+                </a>
+            </div>
+            <input type="text" placeholder="Username" name="username" ng-model="username">
+            <input type="password" placeholder="Password" name="password" ng-model="password">
+            <button type="submit" ng-click="login(username, password)">Login</button>
+        </form>
     </div>
-    <label>
-        Username
-        <input type="text" placeholder="Enter Username" name="username" ng-model="username">
-    </label>
-    <label>
-        Password
-        <input type="password" placeholder="Enter Password" name="password" ng-model="password">
-    </label>
-    <button type="submit" ng-click="login(username, password)">Login</button>
-    <a href="/signup">Signup</a>
-    <a href="/">Go back</a>
-</form>
+    <div id="central-box-background">
+    </div>
+    <div id="go-to-login">
+        <p>You don't have and account yet? <a href="/signup">Signup</a></p>
+    </div>
+</div>
 </body>
 </html>
