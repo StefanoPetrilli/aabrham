@@ -22,7 +22,7 @@ body {
     color: #000000;
 }
 
-.signup #header {
+.header {
     display: grid;
     height: 5vh;
     grid-template-columns: repeat(3, 1fr);
@@ -30,17 +30,17 @@ body {
     padding: 1.5vw;
 }
 
-.signup #header #logo-image-header {
+.header #logo-image-header {
     grid-column: 1;
 }
 
-.signup #header #medium-text {
+.header #medium-text {
     grid-column: 3;
     justify-self: right;
     margin: 0;
 }
 
-.signup #content {
+.content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
