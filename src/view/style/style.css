@@ -1,59 +1,144 @@
-body {
-    background: #FFFFFF;
-
+@font-face {
+    font-family: filson pro;
+    font-style: normal;
+    font-weight: 400;
+    src: local('Filson Pro'), url(https://fonts.cdnfonts.com/s/57464/FilsonProRegular.woff) format('woff')
 }
 
+@font-face {
+    font-family: filson pro;
+    font-style: normal;
+    font-weight: 700;
+    src: local('Filson Pro'), url(https://fonts.cdnfonts.com/s/57464/FilsonProBold.woff) format('woff')
+}
+
+body {
+    background: #FFFFFF;
+    font-family: filson pro, sans-serif;
+    font-style: normal;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.signup #header {
+    display: grid;
+    height: 10vh;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 1.5vw;
+}
+
+.signup #header #logo-image-header {
+    grid-column: 1;
+}
+
+.signup #header #medium-text {
+    grid-column: 3;
+    justify-self: right;
+}
 
 .signup #content {
     display: grid;
-    place-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    height: 85vh;
 }
 
-.signup #central-box{
-    position: absolute;
-    top: 30%;
-    left: 32%;
-    margin: -25px 0 0 -25px;
-    min-width: 500px;
-    max-width: 500px;
+.signup #central-box {
+    grid-column: 2;
+    grid-row: 2;
+    height: 40vh;
+    aspect-ratio: 10/8;
     background-color: #22EE5B;
-    color: #000000
+    color: #000000;
 }
 
-
-
-h1 {
-    padding-left: 9%;
-    margin-bottom: -5%;
-    font-size: 450%
-}
-h2 {
-    padding-left: 10%;
-    font-size: 200%
-}
-
-label{
-    padding: 30%;
-
-}
-
-
-button {
-    width: 30%;
-    background-color: #000000;
-    color: #ffffff;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-left: 180px;
-}
-
-.square {
-    height: 330px;
-    width: 520px;
+.signup #central-box-background {
+    grid-column: 2;
+    grid-row: 2;
+    height: 40vh;
+    aspect-ratio: 10/8;
     background-color: #000;
     rotate: 10deg;
-    position: absolute;
-    top: 25%;
-    left: 28%;
     z-index: -1;
+}
+
+.signup #go-to-login {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.signup #go-to-login  p{
+    margin-bottom: 0.75vh;
+}
+
+.signup h1 {
+    padding-left: 1.5vw;
+    font-size: 4.5em;
+    margin-top: 2vh;
+    margin-bottom: 0;
+    font-weight: 550;
+}
+
+.signup h2 {
+    padding-left: 1.5vw;
+    font-size: 1.5em;
+    margin-top: 0;
+    font-weight: lighter;
+}
+
+.signup #error-box {
+    display: grid;
+    width: 90%;
+    margin: auto;
+}
+
+.signup #error-message {
+    justify-self: center;
+}
+
+.signup form {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    height: 50%;
+    width: 80%;
+    gap: 12%;
+    margin: auto;
+    padding: 5%;
+}
+
+.signup input {
+    border: 0;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    padding-left: 10px
+}
+
+.signup button {
+    background-color: #000000;
+    color: #ffffff;
+    width: 60%;
+    height: 60%;
+    justify-self: center;
+    border: 0;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#small-text {
+    font-size: 0.75em;
+    margin: 0;
+}
+
+#error-text {
+    color: red;
+    margin: 0;
+}
+
+#medium-text {
+    font-size: 2em;
+    font-weight: bold;
 }
