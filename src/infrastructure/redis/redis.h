@@ -17,7 +17,7 @@ class RedisConnection {
   bool KeyDelete(const std::string &key);
   bool Exist(const std::string &key);
  protected:
-  sw::redis::Redis connection = sw::redis::Redis("tcp://127.0.0.1:6379");
+  sw::redis::Redis connection = sw::redis::Redis("tcp://172.17.0.2:6379");
 };
 }
 #endif //AABRHAM_INFRASTRUCTURE_REDIS_REPOSITORY_H_

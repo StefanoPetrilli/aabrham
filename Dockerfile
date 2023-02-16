@@ -1,5 +1,5 @@
-# get baseimage
-FROM ubuntu:latest
+FROM ubuntu:jammy-20230126
+LABEL Description="Aabrham"
 
 EXPOSE 18080
 
@@ -37,3 +37,14 @@ RUN mkdir build
 WORKDIR build
 RUN cmake .. -DCROW_BUILD_EXAMPLES=OFF -DCROW_BUILD_TESTS=OFF
 RUN make install
+
+WORKDIR ../../aanrham
+
+COPY src/ src/
+COPY test/ test/
+COPY CMakeLists.txt .
+RUN cmake -B build -DCMAKE_BUILD_TYPE=release
+RUN cmake --build build --config release
+
+COPY docker_entrypoint.sh .
+ENTRYPOINT ["./docker_entrypoint.sh"]
