@@ -2,6 +2,7 @@ version: "3.9"
 services:
 
   aabrham:
+    container_name: aabrham
     build: .
     depends_on:
       - redis
@@ -9,9 +10,8 @@ services:
       - "18080:18080"
 
   redis:
+    container_name: redis
     image: "redis/redis-stack"
     ports:
       - "6379:6379"
       - "8001:8001"
-
-# docker compose va usato solo per rilasciare

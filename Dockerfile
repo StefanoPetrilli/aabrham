@@ -38,10 +38,12 @@ WORKDIR build
 RUN cmake .. -DCROW_BUILD_EXAMPLES=OFF -DCROW_BUILD_TESTS=OFF
 RUN make install
 
-WORKDIR ../../aanrham
+WORKDIR ../../aabrham
 
 COPY src/ src/
 COPY test/ test/
+COPY configuration/compose_configuration configuration/local_configuration
+COPY configuration/CMakeLists.txt configuration/CMakeLists.txt
 COPY CMakeLists.txt .
 RUN cmake -B build -DCMAKE_BUILD_TYPE=release
 RUN cmake --build build --config release
