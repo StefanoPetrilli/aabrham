@@ -1,3 +1,5 @@
 add_subdirectory(redis)
 add_subdirectory(hashing)
 add_subdirectory(session)
+add_subdirectory(configuration)
+add_subdirectory(file)

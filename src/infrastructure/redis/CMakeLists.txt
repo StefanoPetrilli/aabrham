@@ -7,4 +7,5 @@ target_link_libraries(redis_repository
         ${HIREDIS_LIB}
         ${REDIS_PLUS_PLUS_HEADER}
         ${REDIS_PLUS_PLUS_LIB}
+        configuration
         )

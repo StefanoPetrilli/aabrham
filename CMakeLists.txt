@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 project(aabrham)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(FETCHCONTENT_QUIET off)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--whole-archive -Wl,--no-whole-archive")
@@ -27,3 +27,4 @@ find_library(REDIS_PLUS_PLUS_LIB redis++)
 
 add_subdirectory(src)
 add_subdirectory(test)
+add_subdirectory(configuration)
