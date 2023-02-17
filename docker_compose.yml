@@ -3,6 +3,8 @@ services:
 
   aabrham:
     build: .
+    depends_on:
+      - redis
     ports:
       - "18080:18080"
 
@@ -11,3 +13,5 @@ services:
     ports:
       - "6379:6379"
       - "8001:8001"
+
+# docker compose va usato solo per rilasciare
