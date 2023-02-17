@@ -3,18 +3,12 @@
 //
 
 #include "file.h"
+
 //TODO this file could really use a refactoring
 //TODO this file need tests
-
-#include <unistd.h>
-#define GetCurrentDir getcwd
-
 namespace file {
 
 static std::string GetConfigurationFileContent() {
-  char buff[FILENAME_MAX]; //create string buffer to hold path
-  GetCurrentDir( buff, FILENAME_MAX );
-
   std::ifstream file_stream(kDefaultConfigurationFilePath + kDefaultConfigurationFileName);
   std::string file_content;
 
