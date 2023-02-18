@@ -22,6 +22,13 @@ static std::string GetConfigurationFileContent() {
   return file_content;
 }
 
+static std::string RemoveEscapeCharacter(const std::string &line) {
+  std::string result = line;
+  while (result.starts_with('\n') || result.starts_with('\r')) result = result.substr(1);
+  while (result.ends_with('\n') || result.ends_with('\r')) result = result.substr(0, result.length() - 1);
+  return result;
+}
+
 std::unordered_map<std::string, std::string> ReadConfigurationFileLines() {
 
   std::string file_content = GetConfigurationFileContent();
@@ -48,13 +55,6 @@ std::unordered_map<std::string, std::string> ReadConfigurationFileLines() {
                       line.substr(line.find(kDelimiter) + 1)
                   });
 
-  return result;
-}
-
-std::string RemoveEscapeCharacter(const std::string &line) {
-  std::string result = line;
-  while (result.starts_with('\n') || result.starts_with('\r')) result = result.substr(1);
-  while (result.ends_with('\n') || result.ends_with('\r')) result = result.substr(0, result.length() - 1);
   return result;
 }
 

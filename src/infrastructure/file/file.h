@@ -25,8 +25,6 @@ const std::string kDefaultConfigurationFilePath = ".."
 const std::string kDefaultConfigurationFileName = "local_configuration";
 const std::string kDelimiter = "=";
 
-static std::string GetConfigurationFileContent();
 std::unordered_map<std::string, std::string> ReadConfigurationFileLines();
-static std::string RemoveEscapeCharacter(const std::string &line);
 }
 #endif //AABRHAM_SRC_INFRASTRUCTURE_FILE_FILE_H_
