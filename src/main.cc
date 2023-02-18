@@ -5,6 +5,7 @@
 #include "style_controller.h"
 #include "index_controller.h"
 #include "signup_controller.h"
+#include "item_controller.h"
 #include "assets_controller.h"
 #include "crow/middlewares/session.h"
 
@@ -23,6 +24,7 @@ int main() {
   style::AddStyleController(&aabrham_backend);
   indexx::AddIndexController(&aabrham_backend);
   signup::AddSignupController(&aabrham_backend);
+  item::AddItemController(&aabrham_backend);
   assets::AddAssetsController(&aabrham_backend);
 
   aabrham_backend.port(18080).multithreaded().run();
