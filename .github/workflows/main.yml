@@ -17,8 +17,5 @@ jobs:
       - name: Build the stack
         run: docker-compose up -d
 
-      - name: print compose up
-        run: docker compose ps --all
-
       - name: Test
         run: docker exec aabrham bash -c "cd build/test && ./aabrham_test"

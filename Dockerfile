@@ -21,24 +21,22 @@ RUN apt-get update \
       libasio-dev \
   && apt-get clean
 
+WORKDIR bin
+
 RUN git clone https://github.com/sewenew/redis-plus-plus.git
-WORKDIR redis-plus-plus
-RUN mkdir build
-WORKDIR build
+WORKDIR ./redis-plus-plus/build
 RUN cmake ..
 RUN make
 RUN make install
 
-WORKDIR ..
+WORKDIR ./../..
 
 RUN git clone https://github.com/CrowCpp/Crow.git
-WORKDIR Crow
-RUN mkdir build
-WORKDIR build
-RUN cmake .. -DCROW_BUILD_EXAMPLES=OFF -DCROW_BUILD_TESTS=OFF
+WORKDIR ./Crow/build
+RUN cmake ./.. -DCROW_BUILD_EXAMPLES=OFF -DCROW_BUILD_TESTS=OFF
 RUN make install
 
-WORKDIR ../../aabrham
+WORKDIR ./../../aabrham
 
 COPY src/ src/
 COPY test/ test/
