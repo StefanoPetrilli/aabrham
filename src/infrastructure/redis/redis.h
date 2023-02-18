@@ -17,6 +17,7 @@ class RedisConnection {
   bool IsConnected();
   bool KeyDelete(const std::string &key);
   bool Exist(const std::string &key);
+  bool Exist(const std::string &key, const std::string &field);
  protected:
   sw::redis::Redis connection = sw::redis::Redis(configuration::Configuration::getInstance()->getRedisAddress());
 };

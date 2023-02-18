@@ -30,6 +30,7 @@ bool RedisConnection::IsConnected() {
     return false;
   }
 }
+
 bool RedisConnection::Exist(const std::string &key) {
   try {
     return connection.exists(key) == 1;
@@ -38,4 +39,11 @@ bool RedisConnection::Exist(const std::string &key) {
   }
 }
 
+bool RedisConnection::Exist(const std::string &key, const std::string &field) {
+  try {
+    return connection.hget(key, field).has_value();
+  } catch (sw::redis::Error& e) {
+    return false;
+  }
+}
 }
