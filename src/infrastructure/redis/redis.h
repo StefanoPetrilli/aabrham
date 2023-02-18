@@ -6,6 +6,7 @@
 #define AABRHAM_INFRASTRUCTURE_REDIS_REPOSITORY_H_
 #include <sw/redis++/redis.h>
 #include <optional>
+#include "configuration.h"
 
 namespace redis_connection {
 class RedisConnection {
@@ -17,7 +18,7 @@ class RedisConnection {
   bool KeyDelete(const std::string &key);
   bool Exist(const std::string &key);
  protected:
-  sw::redis::Redis connection = sw::redis::Redis("tcp://127.0.0.1:6379");
+  sw::redis::Redis connection = sw::redis::Redis(configuration::Configuration::getInstance()->getRedisAddress());
 };
 }
 #endif //AABRHAM_INFRASTRUCTURE_REDIS_REPOSITORY_H_

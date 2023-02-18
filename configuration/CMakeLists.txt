@@ -1,0 +1,1 @@
+configure_file(local_configuration local_configuration COPYONLY)
