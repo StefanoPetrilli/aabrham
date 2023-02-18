@@ -7,6 +7,18 @@
     <title>Insert title here!</title>
 </head>
 <body ng-controller="HomepageController">
+<div ng-show="insertError">
+    {{errorMessage}}
+</div>
+<form method="post">
+    <label>
+        Item name:
+        <input type="text" placeholder="Item name" name="itemName" ng-model="itemName">
+    </label>
+    <button type="submit" ng-click="insertItem(itemName)">Add product</button>
+    <br>
+</form>
+<br>
 <button ng-click="signout()">Signup</button>
 </body>
 </html>
