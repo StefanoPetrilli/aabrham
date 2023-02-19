@@ -25,4 +25,26 @@ crow::json::wvalue InsertItem(std::string product_name, std::string username) {
   };
 }
 
+crow::json::wvalue GetItems(std::string username) {
+  redis_connection::RedisConnection redis_connection;
+  auto key = username + ":objects";
+
+  auto objects =  redis_connection.HashGetAll(key);
+  if (objects.has_value()) {
+    auto objects_value = objects.value();
+    crow::json::wvalue result = {
+        {"result", true},
+    };
+    for(auto it = objects_value.begin(); it != objects_value.end(); ++it) {
+      result["items"][it->first] = it->second;
+    }
+    return result;
+  }
+
+  return {
+      {"result", false},
+      {"error", "Error retrieving items from the database."}
+  };
+}
+
 }

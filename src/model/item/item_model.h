@@ -11,5 +11,6 @@
 
 namespace item {
 crow::json::wvalue InsertItem(std::string product_name, std::string username);
+crow::json::wvalue GetItems(std::string username);
 }
 #endif //AABRHAM_SRC_MODEL_ITEM_ITEM_MODEL_H_

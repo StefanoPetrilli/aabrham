@@ -16,9 +16,14 @@
         <input type="text" placeholder="Item name" name="itemName" ng-model="itemName">
     </label>
     <button type="submit" ng-click="insertItem(itemName)">Add product</button>
-    <br>
 </form>
-<br>
+<br> <br>
+<div class="item-list">
+    <ul data-ng-init="init()">
+        <li ng-repeat="(key, value) in items">{{key}}</li>
+    </ul>
+</div>
+<br> <br>
 <button ng-click="signout()">Signup</button>
 </body>
 </html>
