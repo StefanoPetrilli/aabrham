@@ -3,10 +3,17 @@
 //
 
 #include "item_model.h"
-
-namespace item {
 //TODO write tests
-crow::json::wvalue InsertItem(std::string product_name, std::string username) {
+namespace item {
+
+static long GetTimestampPlusHours(int hours) {
+  auto now = std::chrono::system_clock::now().time_since_epoch();
+  auto hours_to_add = std::chrono::hours(hours);
+  auto result_timestamp = now + hours_to_add;
+  return duration_cast<std::chrono::milliseconds>(result_timestamp).count();
+}
+
+crow::json::wvalue InsertItem(const std::string& product_name, const std::string& username) { //TODO rewrite using hsetnx
   redis_connection::RedisConnection redis_connection;
   std::string key = username + ":objects";
 
@@ -16,7 +23,12 @@ crow::json::wvalue InsertItem(std::string product_name, std::string username) {
         {"error", "An item with the same name is already present in the database. Try with a different name."}
     };
 
-  if (redis_connection.HashSet(key, product_name, ""))
+  crow::json::wvalue field_value = {
+      {"time", GetTimestampPlusHours(1)},
+      {"hasBeenBought", false} //TODO write an enum to handle the case where a decision has not been made yet
+  };
+
+  if (redis_connection.HashSet(key, product_name, field_value.dump()))
     return {{"result", true}};
 
   return {
@@ -25,19 +37,21 @@ crow::json::wvalue InsertItem(std::string product_name, std::string username) {
   };
 }
 
-crow::json::wvalue GetItems(std::string username) {
+crow::json::wvalue GetItems(const std::string& username) {
   redis_connection::RedisConnection redis_connection;
   auto key = username + ":objects";
 
-  auto objects =  redis_connection.HashGetAll(key);
+  auto objects = redis_connection.HashGetAll(key);
   if (objects.has_value()) {
-    auto objects_value = objects.value();
     crow::json::wvalue result = {
-        {"result", true},
+        {"result", true}
     };
-    for(auto it = objects_value.begin(); it != objects_value.end(); ++it) {
-      result["items"][it->first] = it->second;
+
+    for (auto & it : objects.value()) {
+      result["items"][it.first]["time"] = crow::json::load(it.second)["time"];
+      result["items"][it.first]["hasBeenBought"] = crow::json::load(it.second)["hasBeenBought"];
     }
+
     return result;
   }
 
