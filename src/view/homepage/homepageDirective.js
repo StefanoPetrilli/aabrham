@@ -32,12 +32,29 @@ aabrham.controller('HomepageController', function HomepageController($scope, $ht
         $http.get("/api/item/get").then(function (result) {
             if (result.data.result) {
                 $scope.items = result.data.items;
-                console.log($scope.items);
             } else {
                 $scope.itemsRetrievingErrorMessage = result.data.error;
                 $scope.itemsRetrievingError = true;
             }
         });
-
     }
+
+    var myfunc = setInterval(function () {
+        var now = new Date().getTime();
+
+        for (var i in $scope.items) {
+            var timeleft = $scope.items[i]['time'] - now;
+            if (timeleft > 0) {
+                var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+                $scope.items[i]['timeLeft'] = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            } else {
+                $scope.items[i]['timeLeft'] = false;
+            }
+            console.log($scope.items);
+            $scope.$apply();
+        }
+    }, 1000)
 });
