@@ -33,7 +33,7 @@ void AddLoginController(crow::App<crow::CookieParser, crow::SessionMiddleware<cr
         crow::json::wvalue response = login::Login(username, password);
 
         if (IsPositive(response))
-          session::StartSession(session);
+          session::StartSession(session, username);
 
         return crow::response(std::move(response));
       });

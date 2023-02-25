@@ -9,7 +9,8 @@
 
 namespace session {
 bool IsLogged(crow::SessionMiddleware<crow::InMemoryStore>::context &session);
-void StartSession(crow::SessionMiddleware<crow::InMemoryStore>::context &session);
+void StartSession(crow::SessionMiddleware<crow::InMemoryStore>::context &session, std::string username);
 void Signout(crow::SessionMiddleware<crow::InMemoryStore>::context &session);
+std::string GetUsername(crow::SessionMiddleware<crow::InMemoryStore>::context &session);
 }
 #endif //AABRHAM_SRC_INFRASTRUCTURE_SESSION_SESSION_H_

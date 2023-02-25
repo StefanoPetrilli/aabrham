@@ -33,7 +33,7 @@ void AddSignupController(crow::App<crow::CookieParser, crow::SessionMiddleware<c
         crow::json::wvalue response = signup::Signup(username, password);
 
         if (IsPositive(response))
-          session::StartSession(session);
+          session::StartSession(session, username);
 
         return crow::response(std::move(response));
       });

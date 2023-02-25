@@ -15,13 +15,13 @@
     <div id="central-box">
         <h1>Think Twice.</h1>
         <h2>Just what you really need</h2>
+        <div ng-show="failedLogin">
+            {{loginError}}
+            <a ng-show="showSignup" href="/signup">
+                Signup
+            </a>
+        </div>
         <form method="post">
-            <div ng-show="failedLogin">
-                {{loginError}}
-                <a ng-show="showSignup" href="/signup">
-                    Signup
-                </a>
-            </div>
             <input type="text" placeholder="Username" name="username" ng-model="username">
             <input type="password" placeholder="Password" name="password" ng-model="password">
             <button type="submit" ng-click="login(username, password)">Login</button>
@@ -29,8 +29,8 @@
     </div>
     <div id="central-box-background">
     </div>
-    <div id="go-to-login">
-        <p>You don't have and account yet? <a href="/signup">Signup</a></p>
+    <div id="go-to-signup">
+        <p>You don't have an account yet? <a href="/signup">Signup</a></p>
     </div>
 </div>
 </body>

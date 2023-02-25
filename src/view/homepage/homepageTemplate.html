@@ -7,6 +7,56 @@
     <title>Insert title here!</title>
 </head>
 <body ng-controller="HomepageController">
+<div ng-show="insertError">
+    {{errorMessage}}
+</div>
+<form method="post">
+    <label>
+        Item name:
+        <input type="text" placeholder="Item name" name="itemName" ng-model="formContent.itemName" required>
+    </label>
+    <br>
+    <div ng-repeat="(question, content) in questions">
+        <h3> {{content['question']}} </h3>
+        <div ng-if="content['type'] == 'range'" id="range-input">
+            {{content['leftLabel']}}
+            <input name="rangeValue" type="range" max="{{content['maxValue']}}" ng-model="formContent[question]">
+            {{content['rightLabel']}}
+        </div>
+        <div ng-if="content['type'] == 'yesno'" id="radio-input">
+            <input name="yesno" type="radio" id="yes" value="yes" ng-model="formContent[question]" required> Yes
+            <input name="yesno" type="radio" id="no" value="no" ng-model="formContent[question]" required> No
+        </div>
+    </div>
+    <button type="submit" ng-click="insertItem(formContent)">Add product</button>
+</form>
+{{formContent}} {{newObject}}
+<table class="item-list" data-ng-init="init()">
+    <tr>
+        <th>Item</th>
+        <th>Expires in</th>
+        <th></th>
+    </tr>
+    <tr ng-repeat="(key, value) in items">
+        <td>{{key}}</td>
+        <td>
+            <p ng-if="value['timeLeft'] != false">
+                {{value['timeLeft']}}
+            </p>
+        </td>
+        <td>
+            <form ng-if="!value['timeLeft']">
+                <label>
+                    Bought: <input type="radio">
+                </label>
+                <label>
+                    Not bought: <input type="radio">
+                </label>
+            </form>
+        </td>
+    </tr>
+</table>
+<br> <br>
 <button ng-click="signout()">Signup</button>
 </body>
 </html>

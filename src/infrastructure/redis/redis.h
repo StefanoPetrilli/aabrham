@@ -14,9 +14,11 @@ class RedisConnection {
   RedisConnection();
   bool HashSet(const std::string &key, const std::string &field, const std::string &value);
   std::optional<std::string> HashGet(const std::string &key, const std::string &field);
+  std::optional<std::unordered_map<std::string, std::string>> HashGetAll(const std::string &key);
   bool IsConnected();
   bool KeyDelete(const std::string &key);
   bool Exist(const std::string &key);
+  bool Exist(const std::string &key, const std::string &field);
  protected:
   sw::redis::Redis connection = sw::redis::Redis(configuration::Configuration::getInstance()->getRedisAddress());
 };
