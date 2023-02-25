@@ -12,8 +12,8 @@
 namespace redis_connection_test {
 class RedisTest : public ::testing::Test {
  public:
-  redis_connection::RedisConnection redis_connection;
-  void SetUp();
+  redis_connection::RedisConnection* redis_connection;
+  void SetUp() override;
 };
 }
 #endif //AABRHAM_TEST_INFRASTRUCTURE_REDIS_REDIS_TEST_H_

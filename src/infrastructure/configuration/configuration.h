@@ -20,7 +20,6 @@ class Configuration {
   Configuration();
   static Configuration *instance;
   std::string redis_address_;
-
 };
 }
 #endif //AABRHAM_SRC_INFRASTRUCTURE_CONFIGURATION_CONFIGURATION_H_

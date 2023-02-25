@@ -6,28 +6,28 @@
 namespace redis_connection_test {
 
 void RedisTest::SetUp() {
-  redis_connection = redis_connection::RedisConnection();
-  if (!redis_connection.IsConnected())
+  redis_connection = redis_connection::RedisConnection::getInstance();
+  if (!redis_connection->IsConnected())
     GTEST_SKIP_("Test skipped because it is impossible to connect to the redis database");
 }
 
-TEST_F(RedisTest, Expect_CorrectWrite) {
-  EXPECT_TRUE(redis_connection.HashSet("TestKey", "TestField", "TestValue"));
+TEST_F(RedisTest, HashSet_Expect_CorrectWrite) {
+  EXPECT_TRUE(redis_connection->HashSet("TestKey", "TestField", "TestValue"));
 }
 
-TEST_F(RedisTest, Expect_SuccesfullReadFromDatabase) {
-  auto result = redis_connection.HashGet("TestKey", "TestField").value();
+TEST_F(RedisTest, HashGet_Expect_SuccesfullReadFromDatabase) {
+  auto result = redis_connection->HashGet("TestKey", "TestField").value();
   auto expected = "TestValue";
 
   EXPECT_EQ(expected, result);
 }
 
-TEST_F(RedisTest, Expect_Exist) {
-  EXPECT_TRUE(redis_connection.Exist("TestKey"));
-  EXPECT_FALSE(redis_connection.Exist("NonExistentKey"));
+TEST_F(RedisTest, Exist_Expect_Exist) {
+  EXPECT_TRUE(redis_connection->Exist("TestKey"));
+  EXPECT_FALSE(redis_connection->Exist("NonExistentKey"));
 }
 
-TEST_F(RedisTest, Expect_SuccesfullDeleteFromDatabase) {
-  EXPECT_TRUE(redis_connection.KeyDelete("TestKey"));
+TEST_F(RedisTest, KeyDelete_Expect_SuccesfullDeleteFromDatabase) {
+  EXPECT_TRUE(redis_connection->KeyDelete("TestKey"));
 }
 }

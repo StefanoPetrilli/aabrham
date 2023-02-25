@@ -5,13 +5,13 @@
 
 namespace signup_model_test {
 void SingupModelTest::SetUp() {
-  redis_connection = redis_connection::RedisConnection();
-  if (!redis_connection.IsConnected())
+  redis_connection = redis_connection::RedisConnection::getInstance();
+  if (!redis_connection->IsConnected())
     GTEST_SKIP_("Test skipped because it is impossible to connect to the redis database");
 }
 
 TEST_F(SingupModelTest, Expect_Error_WhenUsernameAlreadyExist) {
-  EXPECT_TRUE(redis_connection.HashSet("username", "password", "psw"));
+  EXPECT_TRUE(redis_connection->HashSet("username", "password", "psw"));
 
   auto result = signup::Signup("username", "psw");
   crow::json::wvalue expected = {
@@ -19,7 +19,7 @@ TEST_F(SingupModelTest, Expect_Error_WhenUsernameAlreadyExist) {
       {"error", "This username is already in use. Try with a different one."}
   };
 
-  EXPECT_TRUE(redis_connection.KeyDelete("username"));
+  EXPECT_TRUE(redis_connection->KeyDelete("username"));
   EXPECT_EQ(expected.dump(), result.dump());
 }
 
@@ -29,7 +29,7 @@ TEST_F(SingupModelTest, Expect_Success) {
       {"result", true},
   };
 
-  EXPECT_TRUE(redis_connection.KeyDelete("new_username"));
+  EXPECT_TRUE(redis_connection->KeyDelete("new_username"));
   EXPECT_EQ(expected.dump(), result.dump());
 }
 }

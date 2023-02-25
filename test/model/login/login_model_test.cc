@@ -5,13 +5,13 @@
 
 namespace login_model_test {
 void LoginModelTest::SetUp() {
-  redis_connection = redis_connection::RedisConnection();
-  if (!redis_connection.IsConnected())
+  redis_connection = redis_connection::RedisConnection::getInstance();
+  if (!redis_connection->IsConnected())
     GTEST_SKIP_("Test skipped because it is impossible to connect to the redis database");
 }
 
 TEST_F(LoginModelTest, Expect_Error_WhenUsernameAndPasswordDoesNotCorrespond) {
-  EXPECT_TRUE(redis_connection.HashSet("username", "password", "psw"));
+  EXPECT_TRUE(redis_connection->HashSet("username", "password", "psw"));
 
   auto result = login::Login("username", "psw");
   crow::json::wvalue expected = {
@@ -19,7 +19,7 @@ TEST_F(LoginModelTest, Expect_Error_WhenUsernameAndPasswordDoesNotCorrespond) {
       {"error", "The combination of username and password does not correspond to any user."}
   };
 
-  EXPECT_TRUE(redis_connection.KeyDelete("username"));
+  EXPECT_TRUE(redis_connection->KeyDelete("username"));
   EXPECT_EQ(expected.dump(), result.dump());
 }
 
@@ -36,7 +36,7 @@ TEST_F(LoginModelTest, Expect_Error_WhenUsernameDoesNotExist) {
 
 TEST_F(LoginModelTest, Expect_Success_WhenUsernameAndPasswordExist) {
 
-  if(!redis_connection.HashSet("unregistered_user", "password", hashing::ToHash("psw")))
+  if(!redis_connection->HashSet("unregistered_user", "password", hashing::ToHash("psw")))
     GTEST_SKIP_("The username used for the test: unregistered_user, is already in use.");
 
   auto result = login::Login("unregistered_user", "psw");

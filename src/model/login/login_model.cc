@@ -7,15 +7,15 @@
 namespace login {
 crow::json::wvalue Login(const std::string &username, const std::string &password) {
 
-  redis_connection::RedisConnection redis_connection;
+  auto redis_connection = redis_connection::RedisConnection::getInstance();
 
-  if (!redis_connection.Exist(username))
+  if (!redis_connection->Exist(username))
     return {
         {"result", false},
         {"error", "The username is not in the database. You might want to "}
       };
 
-  auto stored_password = redis_connection.HashGet(username, "password");
+  auto stored_password = redis_connection->HashGet(username, "password");
   if (stored_password->empty())
     return {
         {"result", false},
