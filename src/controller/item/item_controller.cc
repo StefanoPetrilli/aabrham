@@ -5,7 +5,6 @@
 #include "item_controller.h"
 
 namespace item {
-crow::response InsertItem();
 void AddItemController(crow::App<crow::CookieParser, crow::SessionMiddleware<crow::InMemoryStore>> *app) {
   auto &aabrham = *app;
 
@@ -20,7 +19,7 @@ void AddItemController(crow::App<crow::CookieParser, crow::SessionMiddleware<cro
             if (!session::IsLogged(session))
               response = crow::response(401, "To perform this action, first you should login.");
             else {
-              response = item::InsertItem(serialized_request["itemName"].s(), session::GetUsername(session));
+              response = item::InsertItem(serialized_request, session::GetUsername(session));
             }
 
             return response;

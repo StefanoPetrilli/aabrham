@@ -10,7 +10,10 @@
 #include "../../infrastructure/redis/redis.h"
 
 namespace item {
-crow::json::wvalue InsertItem(const std::string& product_name, const std::string& username);
-crow::json::wvalue GetItems(const std::string& username);
+static const std::string kQuestionEvalKey = "question:eval";
+crow::json::wvalue InsertItem(const crow::json::rvalue &item_data, const std::string &username);
+crow::json::wvalue GetItems(const std::string &username);
+long GetDelay(const crow::json::rvalue &values);
+int GetNumberOfHoursCorrespondingToAnswer(const std::string &key, const crow::json::rvalue &);
 }
 #endif //AABRHAM_SRC_MODEL_ITEM_ITEM_MODEL_H_

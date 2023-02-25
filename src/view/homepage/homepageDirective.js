@@ -2,8 +2,11 @@ var aabrham = angular.module('aabrham', []);
 
 aabrham.controller('HomepageController', function HomepageController($scope, $http) {
 
+    $scope.formContent = {};
+
     $scope.init = function () {
         $scope.getItems();
+        $scope.getQuestions();
     };
 
     $scope.signout = function () {
@@ -14,16 +17,23 @@ aabrham.controller('HomepageController', function HomepageController($scope, $ht
         });
     }
 
-    $scope.insertItem = function (itemName) {
-        let message = {
-            itemName: itemName
-        };
-
-        $http.post("/api/item/insert", JSON.stringify(message)).then(function (result) {
+    $scope.insertItem = function (formContent) {
+        $http.post("/api/item/insert", JSON.stringify(formContent)).then(function (result) {
             if (result.data.result) $scope.getItems();
             else {
                 $scope.errorMessage = result.data.error;
                 $scope.insertError = true;
+            }
+        });
+    }
+
+    $scope.getQuestions = function () {
+        $http.get("/api/question/get").then(function (result) {
+            if (result.data.result) {
+                $scope.questions = result.data.questions;
+            } else {
+                $scope.questionsRetrievingErrorMessage = result.data.error;
+                $scope.questionsRetrievingError = true;
             }
         });
     }
@@ -39,12 +49,12 @@ aabrham.controller('HomepageController', function HomepageController($scope, $ht
         });
     }
 
-    var myfunc = setInterval(function () {
+    setInterval(function () {
         var now = new Date().getTime();
 
         for (var i in $scope.items) {
             var timeleft = $scope.items[i]['time'] - now;
-            if (timeleft > 0) {
+            if (timeleft > 0) { //TODO rewrite this function
                 var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
                 var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
@@ -53,8 +63,8 @@ aabrham.controller('HomepageController', function HomepageController($scope, $ht
             } else {
                 $scope.items[i]['timeLeft'] = false;
             }
-            console.log($scope.items);
+
             $scope.$apply();
         }
-    }, 1000)
+    }, 1000);
 });

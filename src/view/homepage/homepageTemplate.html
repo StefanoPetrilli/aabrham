@@ -13,11 +13,24 @@
 <form method="post">
     <label>
         Item name:
-        <input type="text" placeholder="Item name" name="itemName" ng-model="itemName">
+        <input type="text" placeholder="Item name" name="itemName" ng-model="formContent.itemName" required>
     </label>
-    <button type="submit" ng-click="insertItem(itemName)">Add product</button>
+    <br>
+    <div ng-repeat="(question, content) in questions">
+        <h3> {{content['question']}} </h3>
+        <div ng-if="content['type'] == 'range'" id="range-input">
+            {{content['leftLabel']}}
+            <input name="rangeValue" type="range" max="{{content['maxValue']}}" ng-model="formContent[question]">
+            {{content['rightLabel']}}
+        </div>
+        <div ng-if="content['type'] == 'yesno'" id="radio-input">
+            <input name="yesno" type="radio" id="yes" value="yes" ng-model="formContent[question]" required> Yes
+            <input name="yesno" type="radio" id="no" value="no" ng-model="formContent[question]" required> No
+        </div>
+    </div>
+    <button type="submit" ng-click="insertItem(formContent)">Add product</button>
 </form>
-<br> <br>
+{{formContent}} {{newObject}}
 <table class="item-list" data-ng-init="init()">
     <tr>
         <th>Item</th>
