@@ -7,6 +7,7 @@
 #include "signup_controller.h"
 #include "item_controller.h"
 #include "assets_controller.h"
+#include "question_controller.h"
 #include "crow/middlewares/session.h"
 
 int main() {
@@ -26,6 +27,7 @@ int main() {
   signup::AddSignupController(&aabrham_backend);
   item::AddItemController(&aabrham_backend);
   assets::AddAssetsController(&aabrham_backend);
+  question::AddQuestionController(&aabrham_backend);
 
   aabrham_backend.port(18080).multithreaded().run();
 }

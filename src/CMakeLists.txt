@@ -16,5 +16,6 @@ target_link_libraries(aabrham
         controller_signup
         controller_assets
         controller_item
+        controller_question
         redis_repository
         )
