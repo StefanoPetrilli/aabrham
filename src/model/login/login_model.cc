@@ -9,6 +9,12 @@ crow::json::wvalue Login(const std::string &username, const std::string &passwor
 
   auto redis_connection = redis_connection::RedisConnection::getInstance();
 
+  if (!redis_connection->IsConnected())
+    return {
+        {"result", false},
+        {"error", "Error connecting to the database."}
+    };
+
   if (!redis_connection->Exist(username))
     return {
         {"result", false},
@@ -19,7 +25,7 @@ crow::json::wvalue Login(const std::string &username, const std::string &passwor
   if (stored_password->empty())
     return {
         {"result", false},
-        {"error", "Error in the login process, contact the developer: "} //TODO add contacts
+        {"error", "Error in the login process"}
     };
 
   if (stored_password.value() != hashing::ToHash(password))

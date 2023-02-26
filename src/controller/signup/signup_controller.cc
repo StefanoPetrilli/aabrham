@@ -40,6 +40,6 @@ void AddSignupController(crow::App<crow::CookieParser, crow::SessionMiddleware<c
 }
 
 bool IsPositive(crow::json::wvalue response) {
-  return response["result"].dump() == "true"; //TODO Is there a more elegant way of doing this?
+  return response["result"].dump() == "true";
 }
 }

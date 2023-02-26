@@ -9,6 +9,12 @@ crow::json::wvalue Signup(const std::string &username, const std::string &passwo
 
   auto redis_connection = redis_connection::RedisConnection::getInstance();
 
+  if (!redis_connection->IsConnected())
+    return {
+        {"result", false},
+        {"error", "Error connecting to the database."}
+    };
+
   if (redis_connection->Exist(username))
     return {
         {"result", false},

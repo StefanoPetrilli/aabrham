@@ -7,7 +7,7 @@
 namespace item {
 
 crow::json::wvalue InsertItem(const crow::json::rvalue &item_data,
-                              const std::string &username) { //TODO rewrite using hsetnx
+                              const std::string &username) {
   auto redis_connection = redis_connection::RedisConnection::getInstance();
   auto key = username + ":objects";
   auto itemName = item_data["itemName"].s();
