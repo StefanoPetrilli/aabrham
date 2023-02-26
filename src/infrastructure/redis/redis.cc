@@ -6,19 +6,19 @@
 namespace redis_connection {
 RedisConnection *RedisConnection::instance = nullptr;
 
-RedisConnection::RedisConnection() : connection_(configuration::Configuration::getInstance()->getRedisAddress()) {}
+RedisConnection::RedisConnection(const std::string &connection_string)
+    : connection_(connection_string) {}
 
 RedisConnection *RedisConnection::getInstance() {
   if (instance == nullptr)
-    instance = new RedisConnection();
+    instance = new RedisConnection(configuration::Configuration::getInstance()->getRedisAddress());
   return instance;
 }
 
 bool RedisConnection::HashSet(const std::string &key, const std::string &field, const std::string &value) {
   try {
-    connection_.hset(key, std::make_pair(field, value));
-    return true;
-  } catch (sw::redis::Error& e) {
+    return connection_.hset(key, std::make_pair(field, value));
+  } catch (sw::redis::Error &e) {
     return false;
   }
 }
@@ -33,8 +33,8 @@ bool RedisConnection::KeyDelete(const std::string &key) {
 
 bool RedisConnection::IsConnected() {
   try {
-    return connection_.ping("").empty();
-  } catch (sw::redis::Error& e) {
+    return connection_.ping("ping") == "ping";
+  } catch (sw::redis::Error &e) {
     return false;
   }
 }
@@ -42,7 +42,7 @@ bool RedisConnection::IsConnected() {
 bool RedisConnection::Exist(const std::string &key) {
   try {
     return connection_.exists(key) == 1;
-  } catch (sw::redis::Error& e) {
+  } catch (sw::redis::Error &e) {
     return false;
   }
 }
@@ -50,7 +50,7 @@ bool RedisConnection::Exist(const std::string &key) {
 bool RedisConnection::Exist(const std::string &key, const std::string &field) {
   try {
     return connection_.hget(key, field).has_value();
-  } catch (sw::redis::Error& e) {
+  } catch (sw::redis::Error &e) {
     return false;
   }
 }
@@ -60,10 +60,12 @@ std::optional<std::unordered_map<std::string, std::string>> RedisConnection::Has
 
   try {
     connection_.hgetall(key, std::inserter(output, output.begin()));
-  } catch (sw::redis::Error& e) {
+    if (output.empty()) return std::nullopt;
+  } catch (sw::redis::Error &e) {
     return output;
   }
 
   return output;
 }
+
 }

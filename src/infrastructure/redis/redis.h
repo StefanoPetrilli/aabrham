@@ -23,7 +23,7 @@ class RedisConnection {
   std::optional<std::unordered_map<std::string, std::string>> HashGetAll(const std::string &key);
 
  private:
-  RedisConnection();
+  explicit RedisConnection(const std::string& connection_string);
   static RedisConnection *instance;
   sw::redis::Redis connection_;
 };
