@@ -3,7 +3,6 @@
 //
 
 #include "item_model.h"
-//TODO write tests
 namespace item {
 
 crow::json::wvalue InsertItem(const crow::json::rvalue &item_data,

@@ -36,8 +36,8 @@ TEST_F(LoginModelTest, Expect_Error_WhenUsernameDoesNotExist) {
 
 TEST_F(LoginModelTest, Expect_Success_WhenUsernameAndPasswordExist) {
 
-  if(!redis_connection->HashSet("unregistered_user", "password", hashing::ToHash("psw")))
-    GTEST_SKIP_("The username used for the test: unregistered_user, is already in use.");
+  if(redis_connection->HashSet("unregistered_user", "password", hashing::ToHash("psw")))
+    GTEST_SKIP_("The username used for the test: unregistered_user, does not exist.");
 
   auto result = login::Login("unregistered_user", "psw");
   crow::json::wvalue expected = {
