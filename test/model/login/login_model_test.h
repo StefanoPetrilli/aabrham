@@ -13,7 +13,7 @@
 namespace login_model_test {
 class LoginModelTest : public ::testing::Test {
  public:
-  redis_connection::RedisConnection redis_connection;
+  redis_connection::RedisConnection* redis_connection;
   void SetUp();
 };
 }

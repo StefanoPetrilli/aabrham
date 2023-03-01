@@ -13,7 +13,7 @@
 namespace signup_model_test {
 class SingupModelTest : public ::testing::Test {
  public:
-  redis_connection::RedisConnection redis_connection;
+  redis_connection::RedisConnection* redis_connection;
   void SetUp();
 };
 }

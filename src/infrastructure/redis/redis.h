@@ -11,16 +11,21 @@
 namespace redis_connection {
 class RedisConnection {
  public:
-  RedisConnection();
+  static RedisConnection *getInstance();
+  RedisConnection(RedisConnection const &) = delete;
+  void operator=(RedisConnection const &) = delete;
+  bool IsConnected();
   bool HashSet(const std::string &key, const std::string &field, const std::string &value);
   std::optional<std::string> HashGet(const std::string &key, const std::string &field);
-  std::optional<std::unordered_map<std::string, std::string>> HashGetAll(const std::string &key);
-  bool IsConnected();
   bool KeyDelete(const std::string &key);
   bool Exist(const std::string &key);
   bool Exist(const std::string &key, const std::string &field);
- protected:
-  sw::redis::Redis connection = sw::redis::Redis(configuration::Configuration::getInstance()->getRedisAddress());
+  std::optional<std::unordered_map<std::string, std::string>> HashGetAll(const std::string &key);
+
+ private:
+  explicit RedisConnection(const std::string& connection_string);
+  static RedisConnection *instance;
+  sw::redis::Redis connection_;
 };
 }
 #endif //AABRHAM_INFRASTRUCTURE_REDIS_REPOSITORY_H_

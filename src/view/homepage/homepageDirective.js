@@ -11,16 +11,13 @@ aabrham.controller('HomepageController', function HomepageController($scope, $ht
 
     $scope.signout = function () {
         $http.get("/homepage/api/signout").then(function (result) {
-            result.data.result ?
-                window.location.href = "/" :
-                $scope.failedLogin = true;
+            result.data.result ? window.location.href = "/" : $scope.failedLogin = true;
         });
     }
 
     $scope.insertItem = function (formContent) {
         $http.post("/api/item/insert", JSON.stringify(formContent)).then(function (result) {
-            if (result.data.result) $scope.getItems();
-            else {
+            if (result.data.result) $scope.getItems(); else {
                 $scope.errorMessage = result.data.error;
                 $scope.insertError = true;
             }
@@ -49,22 +46,35 @@ aabrham.controller('HomepageController', function HomepageController($scope, $ht
         });
     }
 
-    setInterval(function () {
-        var now = new Date().getTime();
+    const millisecondsInSecond = 1000;
+    const millisecondsInMinute = millisecondsInSecond * 60;
+    const millisecondsInHour = millisecondsInMinute * 60;
+    const millisecondsInDay = millisecondsInHour * 24;
 
-        for (var i in $scope.items) {
-            var timeleft = $scope.items[i]['time'] - now;
-            if (timeleft > 0) { //TODO rewrite this function
-                var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-                $scope.items[i]['timeLeft'] = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-            } else {
+    const getDaysLeft = (milliseconds) => Math.floor(milliseconds / (millisecondsInDay))
+
+    const getHoursLeft = (milliseconds) => Math.floor(milliseconds % (millisecondsInDay)) / (millisecondsInHour);
+
+    const getMinutesLeft = (milliseconds) => Math.floor((milliseconds % (millisecondsInHour)) / (millisecondsInMinute));
+
+    const getSecondsLeft = (milliseconds) => Math.floor((milliseconds % (millisecondsInMinute)) / millisecondsInSecond);
+
+
+    setInterval(() => {
+        const now = new Date().getTime();
+
+        for (const i in $scope.items) {
+            const timeLeft = $scope.items[i]['time'] - now;
+            if (timeLeft > 0)
+                $scope.items[i]['timeLeft'] =
+                    getDaysLeft(timeLeft) + "d " +
+                    getDaysLeft(timeLeft) + "h " +
+                    getMinutesLeft(timeLeft) + "m " +
+                    getSecondsLeft(timeLeft) + "s ";
+            else
                 $scope.items[i]['timeLeft'] = false;
-            }
 
             $scope.$apply();
         }
-    }, 1000);
+    }, millisecondsInSecond);
 });

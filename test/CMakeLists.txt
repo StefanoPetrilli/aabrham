@@ -10,7 +10,9 @@ add_executable(aabrham_test
         model/signup/signup_model_test.cc
         model/signup/signup_model_test.h
         model/login/login_model_test.cc
-        model/login/login_model_test.h)
+        model/login/login_model_test.h
+        model/item/item_model_test.cc
+        model/item/item_model_test.h)
 
 find_package(Crow)
 target_link_libraries(aabrham_test
@@ -23,6 +25,8 @@ target_link_libraries(aabrham_test
         controller_index
         controller_signup
         model_signup
+        model_item
+        model_login
         redis_repository
         hashing)
 

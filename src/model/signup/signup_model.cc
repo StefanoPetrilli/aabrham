@@ -7,15 +7,21 @@
 namespace signup {
 crow::json::wvalue Signup(const std::string &username, const std::string &password) {
 
-  redis_connection::RedisConnection redis_connection;
+  auto redis_connection = redis_connection::RedisConnection::getInstance();
 
-  if (redis_connection.Exist(username))
+  if (!redis_connection->IsConnected())
+    return {
+        {"result", false},
+        {"error", "Error connecting to the database."}
+    };
+
+  if (redis_connection->Exist(username))
     return {
         {"result", false},
         {"error", "This username is already in use. Try with a different one."}
     };
 
-  if (redis_connection.HashSet(username, "password", hashing::ToHash(password)))
+  if (redis_connection->HashSet(username, "password", hashing::ToHash(password)))
     return {{"result", true}};
 
   return {

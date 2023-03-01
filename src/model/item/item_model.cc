@@ -3,16 +3,15 @@
 //
 
 #include "item_model.h"
-//TODO write tests
 namespace item {
 
 crow::json::wvalue InsertItem(const crow::json::rvalue &item_data,
-                              const std::string &username) { //TODO rewrite using hsetnx
-  redis_connection::RedisConnection redis_connection;
+                              const std::string &username) {
+  auto redis_connection = redis_connection::RedisConnection::getInstance();
   auto key = username + ":objects";
   auto itemName = item_data["itemName"].s();
 
-  if (redis_connection.Exist(key, itemName))
+  if (redis_connection->Exist(key, itemName))
     return {
         {"result", false},
         {"error", "An item with the same name is already present in the database. Try with a different name."}
@@ -23,7 +22,7 @@ crow::json::wvalue InsertItem(const crow::json::rvalue &item_data,
       {"hasBeenBought", false}
   };
 
-  if (redis_connection.HashSet(key, itemName, field_value.dump()))
+  if (redis_connection->HashSet(key, itemName, field_value.dump()))
     return {{"result", true}};
 
   return {
@@ -33,10 +32,10 @@ crow::json::wvalue InsertItem(const crow::json::rvalue &item_data,
 }
 
 crow::json::wvalue GetItems(const std::string &username) {
-  redis_connection::RedisConnection redis_connection;
+  auto redis_connection = redis_connection::RedisConnection::getInstance();
   auto key = username + ":objects";
 
-  auto objects = redis_connection.HashGetAll(key);
+  auto objects = redis_connection->HashGetAll(key);
   if (objects.has_value()) {
     crow::json::wvalue result = {
         {"result", true}
@@ -75,7 +74,7 @@ long GetDelay(const crow::json::rvalue &values) {
 }
 
 int GetNumberOfHoursCorrespondingToAnswer(const std::string &key, const crow::json::rvalue &answer) {
-  redis_connection::RedisConnection redis_connection;
+  auto redis_connection = redis_connection::RedisConnection::getInstance();
   std::string field = key + ":";
 
   switch (answer.t()) {
@@ -85,7 +84,7 @@ int GetNumberOfHoursCorrespondingToAnswer(const std::string &key, const crow::js
       break;
   }
 
-  auto hours = redis_connection.HashGet(kQuestionEvalKey, field);
+  auto hours = redis_connection->HashGet(kQuestionEvalKey, field);
   if (hours.has_value()) return std::stoi(hours.value());
 
   return -1;

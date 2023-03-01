@@ -7,8 +7,8 @@
 namespace question {
 
 crow::json::wvalue GetQuestions() {
-  redis_connection::RedisConnection redis_connection;
-  auto question = redis_connection.HashGetAll(kQuestionKey);
+  auto redis_connection = redis_connection::RedisConnection::getInstance();
+  auto question = redis_connection->HashGetAll(kQuestionKey);
 
   if (question.has_value()) {
     crow::json::wvalue result = {
