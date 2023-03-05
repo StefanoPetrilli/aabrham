@@ -156,3 +156,52 @@ body {
     font-size: 2em;
     font-weight: bold;
 }
+
+.top {
+    margin-top: 1em;
+    display: grid;
+    height: 5vh;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 1.5vw;
+}
+#homepage-rectangle1 {
+    width: 15vh;
+    height: 40vh;
+    background-color: #F1F1F1;
+}
+
+#homepage-rectangle2 {
+    width: 113vh;
+    height: 40vh;
+    background-color: #F1F1F1;
+}
+
+#homepage-main-title {
+    font-size: 4em;
+    width: 70vh;
+}
+
+.top2 {
+    display: grid;
+    margin-top: 15em;
+}
+#homepage-title-description {
+    padding-left: 11vw;
+    width: 55vh;
+}
+
+#homepage-paragraph {
+    font-size: 1em;
+    margin-left: 11vw;
+}
+
+#button2 {
+    margin-left: 11vw;
+    background-color: #22EE5B;
+    width: 8em;
+    height: 2em;
+    font-family: "Filson Pro";
+    font-size: 1.5em;
+
+}
